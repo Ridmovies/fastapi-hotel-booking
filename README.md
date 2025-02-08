@@ -1,0 +1,99 @@
+<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<a id="readme-top"></a>
+<!--
+*** Thanks for checking out the Best-README-Template. If you have a suggestion
+*** that would make this better, please fork the repo and create a pull request
+*** or simply open an issue with the tag "enhancement".
+*** Don't forget to give the project a star!
+*** Thanks again! Now go create something AMAZING! :D
+-->
+
+
+
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+
+[![Python](https://img.shields.io/badge/-Python-464646?style=flat-square&logo=Python)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/-FastAPI-464646?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![Асинхронность](https://img.shields.io/badge/-Асинхронность-464646?style=flat-square&logo=Асинхронность)]()
+[![Anyio](https://img.shields.io/badge/-Anyio-464646?style=flat-square&logo=Anyio)](https://anyio.readthedocs.io/en/stable/)
+[![Cookies](https://img.shields.io/badge/-Cookies-464646?style=flat-square&logo=Cookies)]()
+[![JWT](https://img.shields.io/badge/-JWT-464646?style=flat-square&logo=JWT)]()
+[![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-464646?style=flat-square&logo=PostgreSQL)](https://www.postgresql.org/)
+[![Alembic](https://img.shields.io/badge/-Alembic-464646?style=flat-square&logo=Alembic)](https://alembic.sqlalchemy.org/en/latest/)
+[![SQLAlchemy](https://img.shields.io/badge/-SQLAlchemy-464646?style=flat-square&logo=SQLAlchemy)](https://www.sqlalchemy.org/)
+[![Docker](https://img.shields.io/badge/-Docker-464646?style=flat-square&logo=docker)](https://www.docker.com/)
+[![Redis](https://img.shields.io/badge/-Redis-464646?style=flat-square&logo=Redis)](https://redis.io/)
+[![Celery](https://img.shields.io/badge/-Celery-464646?style=flat-square&logo=Celery)](https://docs.celeryq.dev/en/stable/)
+[![Sentry](https://img.shields.io/badge/-Sentry-464646?style=flat-square&logo=Sentry)](https://sentry.io/welcome/)
+[![Prometheus](https://img.shields.io/badge/-Prometheus-464646?style=flat-square&logo=Prometheus)](https://prometheus.io/)
+[![Grafana](https://img.shields.io/badge/-Grafana-464646?style=flat-square&logo=Grafana)](https://grafana.com/)
+[![Uvicorn](https://img.shields.io/badge/-Uvicorn-464646?style=flat-square&logo=uvicorn)](https://www.uvicorn.org/)
+[![Gunicorn](https://img.shields.io/badge/-Gunicorn-464646?style=flat-square&logo=gunicorn)](https://gunicorn.org/)
+
+<!-- PROJECT NAME -->
+<h2 align="center">Fastapi Hotel Booking</h2>
+
+
+<!-- DESCRIPTION -->
+<h4 align="center">
+Hotel booking service. Users can book the desired type of hotel room for a specific date.
+</h4>
+
+
+
+## Develop 
+
+### Start your application using Uvicorn in root folder :
+ ``` 
+uvicorn src.main:app --host 127.0.0.1 --port 8000 --reload 
+```
+
+### Poetry Dependency Management System
+### Creating a New Project
+
+```bash
+poetry new my-project
+```
+This command will create a new project structure with a `pyproject.toml` file where dependencies are stored.
+
+### Initializing an Existing Project
+```bash
+poetry init
+```
+
+This command initializes the project by asking for necessary parameters and creating a `pyproject.toml` file.
+
+### Adding a Package
+```bash
+poetry add requests
+```
+Adds the `requests` package to your project's list of dependencies.
+To add a package under the `[tool.poetry.dev-dependencies]` section in the `pyproject.toml` file, use the following command:
+```bash
+poetry add black --group dev
+```
+### Updating All Packages
+```bash
+poetry update
+```
+Updates all packages to their latest compatible versions.
+
+### Synchronizing Poetry with Virtual Environment
+```bash
+poetry install --sync
+```
+### Showing the Package Tree
+```bash
+poetry show --tree
+```
+### Removing a Package
+```bash
+poetry remove <package_name>
+```
