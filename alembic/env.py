@@ -11,6 +11,7 @@ from src.config import settings
 from src.models import Base
 
 from src.hotels.models import Hotel # noqa
+from src.users.models import User # noqa
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
