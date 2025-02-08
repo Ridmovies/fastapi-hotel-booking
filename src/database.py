@@ -3,8 +3,10 @@ from typing import Annotated, AsyncGenerator
 from fastapi import Depends
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 
+from src.config import settings
+
 async_engine = create_async_engine(
-    "postgresql+asyncpg://postgres:root@localhost:5432/booking_db",
+    settings.DATABASE_URL,
 )
 
 async_session_factory = async_sessionmaker(

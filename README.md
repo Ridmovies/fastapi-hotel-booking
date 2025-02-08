@@ -104,3 +104,5 @@ SQLAlchemy с FastAPI для асинхронной работы:
 https://habr.com/ru/companies/otus/articles/683366/
 SQLAlchemy 2.0 Documentation:
 https://docs.sqlalchemy.org/en/20/dialects/postgresql.html#module-sqlalchemy.dialects.postgresql.asyncpg
+Pydantic Settings Management:
+https://docs.pydantic.dev/latest/concepts/pydantic_settings/#usage
