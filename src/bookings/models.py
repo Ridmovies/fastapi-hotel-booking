@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from sqlalchemy import ForeignKey, Date, Computed
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -5,8 +7,8 @@ from src.models import Base
 
 
 class Booking(Base):
-    date_from: Mapped[Date]
-    date_to: Mapped[Date]
+    date_from: Mapped[datetime] = mapped_column(Date)
+    date_to: Mapped[datetime] = mapped_column(Date)
     price: Mapped[int]
     total_cost: Mapped[int] = mapped_column(Computed("(date_to - date_from + 1) * price"))
     total_days: Mapped[int] = mapped_column(Computed("date_to - date_from + 1"))
