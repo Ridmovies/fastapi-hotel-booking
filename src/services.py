@@ -38,8 +38,11 @@ class BaseService:
         return instance
 
     @classmethod
-    async def delete(cls, session: AsyncSession, model_id: int, user_id: int):
-        query = select(cls.model).filter_by(id=model_id, user_id=user_id)
+    async def delete(cls, session: AsyncSession, model_id: int, user_id: int = None):
+        if user_id is not None:
+            query = select(cls.model).filter_by(id=model_id, user_id=user_id)
+        else:
+            query = select(cls.model).filter_by(id=model_id)
         result = await session.execute(query)
         instance = result.scalar_one_or_none()
         if instance and instance.user_id == user_id:
@@ -52,9 +55,12 @@ class BaseService:
             session: AsyncSession,
             model_id: int,
             update_data,
-            user_id: int,
+            user_id: int = None,
     ):
-        query = select(cls.model).filter_by(id=model_id, user_id=user_id)
+        if user_id is not None:
+            query = select(cls.model).filter_by(id=model_id, user_id=user_id)
+        else:
+            query = select(cls.model).filter_by(id=model_id)
         result = await session.execute(query)
         instance = result.scalar_one_or_none()
         if instance:

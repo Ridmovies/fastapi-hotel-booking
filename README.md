@@ -46,8 +46,9 @@
 Hotel booking service. Users can book the desired type of hotel room for a specific date.
 </h4>
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
+___
 ## Develop 
 
 ### Start your application using Uvicorn in root folder :
@@ -97,7 +98,21 @@ poetry show --tree
 ```bash
 poetry remove <package_name>
 ```
+___
 
+## PostgreSQL
+## Creating a PostgreSQL database via console
+### 1: Connecting to PostgreSQL shell
+```bash
+sudo -u postgres psql
+```
+
+### 2: Creating a new database
+```bash
+CREATE DATABASE database_name;
+```
+
+___
 
 ## Alembic
 
@@ -135,10 +150,19 @@ alembic upgrade head
 ```bash
 alembic downgrade -1
 ```
+___
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ## Useful links:
 SQLAlchemy 2.0 Documentation:
 https://docs.sqlalchemy.org/en/20/dialects/postgresql.html#module-sqlalchemy.dialects.postgresql.asyncpg
+
+SQLAlchemy 2.0 Relationship Patterns:
+https://docs.sqlalchemy.org/en/20/orm/basic_relationships.html
+
 Pydantic Settings Management:
 https://docs.pydantic.dev/latest/concepts/pydantic_settings/#usage
+
+___
