@@ -165,4 +165,9 @@ https://docs.sqlalchemy.org/en/20/orm/basic_relationships.html
 Pydantic Settings Management:
 https://docs.pydantic.dev/latest/concepts/pydantic_settings/#usage
 
+OAuth2 with Password (and hashing), Bearer with JWT tokens:
+https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/#hash-and-verify-the-passwords
+
+bcrypt 4.2.1:
+https://pypi.org/project/bcrypt/
 ___

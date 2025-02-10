@@ -6,7 +6,7 @@ class UserSchemaBase(BaseModel):
 
 
 class UserSchemaCreate(UserSchemaBase):
-    hashed_password: str
+    password: str
 
 
 class UserSchema(UserSchemaBase):
