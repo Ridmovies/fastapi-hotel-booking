@@ -21,4 +21,4 @@ class Room(Base):
     # booking: Mapped[list["Booking"]] = relationship("Booking", back_populates="room")
 
     def __str__(self):
-        return f"Комната: id - {self.id}, название - {self.name}"
+        return f"room: id - {self.id}, name - {self.name}"
