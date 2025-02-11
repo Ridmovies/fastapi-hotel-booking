@@ -6,6 +6,7 @@ from src.hotels.router import hotel_router
 from src.bookings.router import booking_router
 from src.rooms.router import room_router
 from src.auth.router import auth_router
+from src.pages.router import page_router
 
 app = FastAPI()
 app.include_router(user_router, prefix="/users", tags=["users"])
@@ -13,6 +14,8 @@ app.include_router(hotel_router, prefix="/hotel", tags=["hotel"])
 app.include_router(booking_router, prefix="/booking", tags=["booking"])
 app.include_router(room_router, prefix="/room", tags=["room"])
 app.include_router(auth_router, prefix="/auth", tags=["auth"])
+app.include_router(page_router, prefix="/page", tags=["page"])
+
 app.include_router(dev_router, prefix="/dev", tags=["dev"])
 
 
