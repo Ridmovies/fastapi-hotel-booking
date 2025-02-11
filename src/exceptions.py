@@ -1,0 +1,13 @@
+from fastapi import HTTPException, status
+
+
+class MyBookingException(HTTPException):
+    status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+    detail = ''
+
+    def __init__(self):
+        super().__init__(status_code=self.status_code, detail=self.detail)
+
+class RoomCantBookedException(MyBookingException):
+    status_code = status.HTTP_409_CONFLICT
+    detail = 'There are no rooms of this type left available.'
