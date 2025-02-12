@@ -1,8 +1,9 @@
+import asyncio
 from datetime import date, datetime, timedelta
 
 from fastapi import APIRouter, Query
+from fastapi_cache.decorator import cache
 
-from src.bookings.service import BookingService
 from src.database import SessionDep
 from src.exceptions import DateFromCannotBeAfterDateTo, NotFoundException
 from src.hotels.service import HotelService
@@ -11,12 +12,14 @@ hotel_router = APIRouter()
 
 
 @hotel_router.get("")
+@cache(expire=60)
 async def get_all_hotels(session: SessionDep):
     """Get all hotels"""
     return await HotelService.get_all(session)
 
 
 @hotel_router.get('/{location}')
+@cache(expire=60)
 async def get_hotels_by_location(
     session: SessionDep,
     location: str,

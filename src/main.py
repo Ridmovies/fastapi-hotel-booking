@@ -1,5 +1,10 @@
+from contextlib import asynccontextmanager
+from typing import AsyncIterator
+
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.redis import RedisBackend
 from starlette.middleware.cors import CORSMiddleware
 
 from src.dev.router import dev_router
@@ -11,7 +16,16 @@ from src.auth.router import auth_router
 from src.pages.router import page_router
 from src.images.router import image_router
 
-app = FastAPI()
+from redis import asyncio as aioredis
+
+@asynccontextmanager
+async def lifespan(_: FastAPI) -> AsyncIterator[None]:
+    redis = aioredis.from_url("redis://localhost")
+    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 app.mount("/static", StaticFiles(directory="src/static"), name="static")
 
 app.include_router(user_router, prefix="/users", tags=["users"])
