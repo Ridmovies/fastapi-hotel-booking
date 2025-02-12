@@ -1,7 +1,8 @@
 from sqlalchemy import JSON
-from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import Mapped, relationship
 
 from src.models import Base
+from src.rooms.models import Room
 
 
 class Hotel(Base):
@@ -10,4 +11,4 @@ class Hotel(Base):
     services: Mapped[str]
     rooms_quantity: Mapped[int]
     image_id: Mapped[int]
-    # rooms: Mapped[list["Room"]] = relationship("Room", back_populates="hotel")
+    rooms: Mapped[list["Room"]] = relationship("Room", back_populates="hotel")

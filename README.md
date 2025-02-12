@@ -168,7 +168,7 @@ celery -A store beat -l INFO
 
 ### Launching Flower
 ```bash
-celery -A app.tasks.tasks:celery flower
+celery -A src.tasks.tasks:celery flower
 ```
 web-interface: http://0.0.0.0:5555/
 
@@ -195,4 +195,13 @@ https://pypi.org/project/bcrypt/
 
 fastapi-cache:
 https://github.com/long2ice/fastapi-cache
+
+Celery - Distributed Task Queue:
+https://docs.celeryq.dev/en/stable/getting-started/index.html
+
+Background Tasks:
+https://fastapi.tiangolo.com/tutorial/background-tasks/
+
+SQLAlchemy Admin for Starlette/FastAPI:
+https://aminalaee.dev/sqladmin/
 ___
