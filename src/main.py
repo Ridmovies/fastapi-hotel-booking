@@ -8,6 +8,7 @@ from fastapi_cache.backends.redis import RedisBackend
 from sqladmin import Admin
 from starlette.middleware.cors import CORSMiddleware
 
+from src.admin.auth import authentication_backend
 from src.admin.views import UserAdmin, BookingAdmin, HotelAdmin
 from src.database import async_engine
 from src.dev.router import dev_router
@@ -30,8 +31,8 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
 
 app = FastAPI(lifespan=lifespan)
 
-admin = Admin(app, async_engine)
-#admin = Admin(app, async_engine, authentication_backend=authentication_backend)
+# admin = Admin(app, async_engine)
+admin = Admin(app, async_engine, authentication_backend=authentication_backend)
 admin.add_view(UserAdmin)
 admin.add_view(BookingAdmin)
 admin.add_view(HotelAdmin)

@@ -51,15 +51,17 @@ async def get_user_by_email(email: str) -> User:
 
 
 def get_access_token(request: Request):
+    """This function is used to get the access token for cookie transport"""
     access_token = request.cookies.get("access_token")
     if not access_token:
         raise credentials_exception
     return access_token
 
 
-
 async def get_current_user(
-        token: Annotated[str, Depends(oauth2_scheme)] if settings.JWT_TRANSPORT == "BEARER" else Annotated[str, Depends(get_access_token)]):
+        token: Annotated[str, Depends(oauth2_scheme)]
+        if settings.JWT_TRANSPORT == "BEARER"
+        else Annotated[str, Depends(get_access_token)]):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         email: str = payload.get("sub")

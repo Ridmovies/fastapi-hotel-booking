@@ -1,22 +1,20 @@
 from sqladmin.authentication import AuthenticationBackend
+from sqlalchemy.ext.asyncio import AsyncSession
 from starlette.requests import Request
 
-from src.auth.jwt_utils import authenticate_user
-
-
-# from src.users.auth import authenticate_user, create_access_token
-# from app.users.dependencies import get_current_user
+from src.auth.jwt_utils import authenticate_user, create_access_token, get_current_user
+from src.database import get_session, SessionDep, async_session_factory
 
 
 class AdminAuth(AuthenticationBackend):
     async def login(self, request: Request) -> bool:
         form = await request.form()
         email, password = form["username"], form["password"]
-
-        user = await authenticate_user(email, password)
-        if user:
-            access_token = create_access_token({"sub": str(user.id)})
-            request.session.update({"token": access_token})
+        async with async_session_factory() as session:
+            user = await authenticate_user(session, email, password)
+            if user:
+                access_token = await create_access_token({"sub": email})
+                request.session.update({"token": access_token})
 
         return True
 
