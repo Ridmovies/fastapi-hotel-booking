@@ -20,5 +20,12 @@ class Config(BaseSettings):
     IMAGE_RESIZED_PATH: str = "src/static/images/small"
     IMAGE_PATH: str = "src/static/images"
 
+    # SMTP EMAIL
+    turn_on_email_notification: bool = False
+    SMTP_USER: str
+    SMTP_PASS: str
+    SMTP_HOST: str
+    SMTP_PORT: int
+
 
 settings = Config()

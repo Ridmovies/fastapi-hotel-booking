@@ -1,11 +1,15 @@
 from datetime import date
 
 from fastapi import APIRouter
+from pydantic import parse_obj_as, TypeAdapter
 
 from src.auth.jwt_utils import UserDep
 from src.bookings.schemas import BookingCreate, BookingSchema
 from src.bookings.service import BookingService
+from src.config import settings
 from src.database import SessionDep
+
+from src.tasks.tasks import send_booking_confirmation_email
 
 booking_router = APIRouter()
 
@@ -26,10 +30,20 @@ async def create_booking(
         user: UserDep, room_id: int, date_from: date, date_to: date
 ):
     """Create a new booking"""
-    return await BookingService.add_booking(
+    booking = await BookingService.add_booking(
         session=session,
         user_id=user.id,
         room_id=room_id,
         date_from=date_from,
         date_to=date_to
     )
+    # Создаем адаптер для вашего типа данных
+    adapter = TypeAdapter(BookingSchema)
+
+    booking_dict = adapter.validate_python(booking).model_dump()
+    # turn_on_email_notification
+    if settings.turn_on_email_notification:
+        send_booking_confirmation_email.delay(
+            booking=booking_dict, email_to=user.email
+        )
+    return booking_dict
