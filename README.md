@@ -152,6 +152,28 @@ alembic downgrade -1
 ```
 ___
 
+
+## Celery
+### Starting a workflow
+```bash
+celery -A src.tasks.tasks:celery worker -l INFO
+```
+app.tasks.tasks:celery - This is the path to the Celery() instance
+
+### Launching the scheduler
+To start the celery beat service:
+```bash
+celery -A store beat -l INFO
+```
+
+### Launching Flower
+```bash
+celery -A app.tasks.tasks:celery flower
+```
+web-interface: http://0.0.0.0:5555/
+
+___
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -168,6 +190,9 @@ https://docs.pydantic.dev/latest/concepts/pydantic_settings/#usage
 OAuth2 with Password (and hashing), Bearer with JWT tokens:
 https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/#hash-and-verify-the-passwords
 
-bcrypt 4.2.1:
+bcrypt:
 https://pypi.org/project/bcrypt/
+
+fastapi-cache:
+https://github.com/long2ice/fastapi-cache
 ___
