@@ -2,7 +2,7 @@ from datetime import timedelta, datetime, timezone
 from typing import Annotated
 
 import jwt
-from fastapi import Depends
+from fastapi import Depends, Request
 from fastapi.security import OAuth2PasswordBearer
 from jwt import InvalidTokenError
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -50,8 +50,16 @@ async def get_user_by_email(email: str) -> User:
         return user
 
 
+def get_access_token(request: Request):
+    access_token = request.cookies.get("access_token")
+    if not access_token:
+        raise credentials_exception
+    return access_token
 
-async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
+
+
+async def get_current_user(
+        token: Annotated[str, Depends(oauth2_scheme)] if settings.JWT_TRANSPORT == "BEARER" else Annotated[str, Depends(get_access_token)]):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         email: str = payload.get("sub")
