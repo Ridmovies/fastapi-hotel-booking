@@ -24,6 +24,10 @@ celery = "^5.4.0"
 pillow = "^11.1.0"
 sqladmin = "^0.20.1"
 itsdangerous = "^2.2.0"
+pytest = "^8.3.4"
+pytest-asyncio = "^0.25.3"
+httpx = "^0.28.1"
+pydantic = {extras = ["email"], version = "^2.10.6"}
 
 
 [tool.poetry.group.dev.dependencies]

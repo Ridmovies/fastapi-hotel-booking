@@ -1,9 +1,8 @@
 from sqladmin.authentication import AuthenticationBackend
-from sqlalchemy.ext.asyncio import AsyncSession
 from starlette.requests import Request
 
 from src.auth.jwt_utils import authenticate_user, create_access_token, get_current_user
-from src.database import get_session, SessionDep, async_session_factory
+from src.database import async_session_factory
 
 
 class AdminAuth(AuthenticationBackend):
@@ -30,7 +29,6 @@ class AdminAuth(AuthenticationBackend):
         user = await get_current_user(token)
         if not user:
             return False
-        # Check the token in depth
         return True
 
 

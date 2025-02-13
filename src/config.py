@@ -6,10 +6,11 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Config(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env")
 
-    # MODE: Literal["DEV", "TEST", "PROD"]
+    MODE: Literal["DEV", "TEST", "PROD"]
 
     # postgresql
     DATABASE_URL: str
+    TEST_DATABASE_URL: str
 
     # REDIS
     REDIS_HOST: str

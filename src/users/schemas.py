@@ -1,8 +1,8 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 
 class UserSchemaBase(BaseModel):
-    email: str | None = None
+    email: EmailStr | None = None
 
 
 class UserSchemaCreate(UserSchemaBase):
