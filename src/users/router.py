@@ -12,6 +12,7 @@ user_router = APIRouter()
 async def get_all_users(session: SessionDep):
     return await UserService.get_all(session)
 
+
 @user_router.post("", response_model=UserSchema)
 async def create_user(session: SessionDep, user_data: UserSchemaCreate):
     exist_user = await UserService.get_one_or_none(session=session, email=user_data.email)

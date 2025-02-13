@@ -1,7 +1,7 @@
 from datetime import timedelta
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, Response, Request
 from fastapi.security import OAuth2PasswordRequestForm
 
 from src.auth.exception import credentials_exception
@@ -31,9 +31,23 @@ async def login_for_access_token(
         data={"sub": user.email}, expires_delta=access_token_expires
     )
     if settings.JWT_TRANSPORT == "COOKIE":
-        response.set_cookie("access_token", access_token, httponly=True)
+        response.set_cookie(
+            key="access_token",
+            value=access_token,
+            httponly=True,
+            path="/",
+            secure=False,
+        )
         return TokenSchema(access_token=access_token, token_type="cookie")
     return TokenSchema(access_token=access_token, token_type="bearer")
+
+@auth_router.post("/logout")
+async def logout(request: Request, response: Response):
+    if settings.JWT_TRANSPORT == "COOKIE":
+        print(response.headers)
+        response.delete_cookie("access_token", path="/")
+        print(response.headers)
+        return Response(status_code=204)
 
 
 @auth_router.get("/me", response_model=UserSchema)
@@ -43,8 +57,3 @@ async def read_users_me(
     return current_user
 
 
-@auth_router.post("/logout")
-async def logout(response: Response):
-    if settings.JWT_TRANSPORT == "COOKIE":
-        response.delete_cookie("access_token", httponly=True)
-        return Response(status_code=204)

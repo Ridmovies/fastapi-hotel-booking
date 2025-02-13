@@ -11,3 +11,4 @@ class UserSchemaCreate(UserSchemaBase):
 
 class UserSchema(UserSchemaBase):
     id: int
+    hashed_password: str

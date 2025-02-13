@@ -74,6 +74,6 @@ async def authenticated_client() -> AsyncGenerator[AsyncClient, None]:
         base_url="http://test",
     ) as ac:
         await ac.post(
-            "/users/auth/login", json={"email": "test@test.com", "password": "test"}
+            "/auth/token", json={"email": "test@test.com", "password": "password"}
         )
         yield ac

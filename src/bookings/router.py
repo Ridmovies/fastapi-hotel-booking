@@ -19,10 +19,12 @@ async def get_all_bookings(session: SessionDep):
     """Get all bookings"""
     return await BookingService.get_all(session)
 
+
 @booking_router.get("/my", response_model=list[BookingSchema])
 async def get_my_bookings(session: SessionDep, user: UserDep):
     """Get all my bookings"""
     return await BookingService.get_all(session, user_id=user.id)
+
 
 @booking_router.post("", response_model=BookingSchema)
 async def create_booking(
