@@ -8,6 +8,7 @@ async def test_get_booking(authenticated_client: AsyncClient):
     assert response.status_code == 200
     assert len(response.json()) == 3
 
+
 @pytest.mark.asyncio
 async def test_get_my_booking(authenticated_client: AsyncClient):
     response = await authenticated_client.get("/booking/my")
@@ -51,8 +52,6 @@ async def test_post_booking_not_available(authenticated_client: AsyncClient):
     assert response.status_code == 200
     response = await authenticated_client.post("/booking", params=params)
     assert response.status_code == 409
-    assert response.json() == {"detail": "There are no rooms of this type left available."}
-
-
-
-
+    assert response.json() == {
+        "detail": "There are no rooms of this type left available."
+    }

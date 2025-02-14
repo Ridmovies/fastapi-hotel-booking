@@ -16,12 +16,12 @@ ACCESS_TOKEN_EXPIRE_MINUTES = settings.ACCESS_TOKEN_EXPIRE_MINUTES
 
 auth_router = APIRouter()
 
+
 @auth_router.post("/token")
 async def login_for_access_token(
-        response: Response,
-        session: SessionDep,
-        form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
-
+    response: Response,
+    session: SessionDep,
+    form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
 ) -> TokenSchema:
     user = await authenticate_user(session, form_data.username, form_data.password)
     if not user:
@@ -39,6 +39,7 @@ async def login_for_access_token(
         return TokenSchema(access_token=access_token, token_type="cookie")
     return TokenSchema(access_token=access_token, token_type="bearer")
 
+
 @auth_router.post("/logout")
 async def logout(response: Response, request: Request):
     if settings.JWT_TRANSPORT == "COOKIE":
@@ -52,5 +53,3 @@ async def read_users_me(
     current_user: Annotated[User, Depends(get_current_user)],
 ):
     return current_user
-
-

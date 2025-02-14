@@ -6,6 +6,7 @@ from httpx import AsyncClient
 from src.database import async_session_factory
 from src.users.service import UserService
 
+
 @pytest.mark.asyncio
 async def test_all_users(client: AsyncClient):
     response = await client.get("/users")
@@ -15,13 +16,9 @@ async def test_all_users(client: AsyncClient):
 
 @pytest.mark.asyncio
 async def test_user_login(client: AsyncClient):
-    data = {
-        "username": "test@test.com",
-        "password": "password"
-    }
+    data = {"username": "test@test.com", "password": "password"}
     response = await client.post("/auth/token", data=data)
     assert response.status_code == 200
-
 
 
 @pytest.mark.asyncio
@@ -34,13 +31,10 @@ async def test_user_login(client: AsyncClient):
         ("1234455@example.com", "1234455", 200),
     ],
 )
-
 async def test_register_user(
     email: str, password: str, status_code: int, client: AsyncClient
 ) -> None:
-    response = await client.post(
-        "/users", json={"email": email, "password": password}
-    )
+    response = await client.post("/users", json={"email": email, "password": password})
     assert response.status_code == status_code
 
 
@@ -89,10 +83,7 @@ async def test_get_me(client: AsyncClient):
     response = await client.get("/auth/me")
     assert response.status_code == 401
 
-    data = {
-        "username": "test@test.com",
-        "password": "password"
-    }
+    data = {"username": "test@test.com", "password": "password"}
     response = await client.post("/auth/token", data=data)
     assert response.status_code == 200
 

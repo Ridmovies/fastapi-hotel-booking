@@ -51,11 +51,11 @@ class BaseService:
 
     @classmethod
     async def update(
-            cls,
-            session: AsyncSession,
-            model_id: int,
-            update_data,
-            user_id: int = None,
+        cls,
+        session: AsyncSession,
+        model_id: int,
+        update_data,
+        user_id: int = None,
     ):
         if user_id is not None:
             query = select(cls.model).filter_by(id=model_id, user_id=user_id)

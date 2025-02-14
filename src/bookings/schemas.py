@@ -13,6 +13,7 @@ class BookingBase(BaseModel):
 class BookingCreate(BookingBase):
     pass
 
+
 class BookingSchema(BookingBase):
     id: int
     total_cost: int

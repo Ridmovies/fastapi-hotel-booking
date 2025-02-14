@@ -22,6 +22,7 @@ from src.images.router import image_router
 
 from redis import asyncio as aioredis
 
+
 @asynccontextmanager
 async def lifespan(_: FastAPI) -> AsyncIterator[None]:
     redis = aioredis.from_url("redis://localhost")
@@ -67,6 +68,7 @@ app.add_middleware(
         "Authorization",
     ],
 )
+
 
 @app.get("/")
 async def root():

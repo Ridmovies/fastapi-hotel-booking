@@ -36,7 +36,7 @@ async def prepare_database():
     bookings_ = _open_mock_json(model="bookings")
 
     for entry in users:
-        entry['hashed_password'] = entry['hashed_password'].encode('utf-8')
+        entry["hashed_password"] = entry["hashed_password"].encode("utf-8")
 
     for d in bookings_:
         d["date_from"] = datetime.strptime(d["date_from"], "%Y-%m-%d")
@@ -73,11 +73,6 @@ async def authenticated_client() -> AsyncGenerator[AsyncClient, None]:
         transport=ASGITransport(app=test_app),
         base_url="http://test",
     ) as ac:
-        data = {
-            "username": "test@test.com",
-            "password": "password"
-        }
-        await ac.post(
-            "/auth/token", data=data
-        )
+        data = {"username": "test@test.com", "password": "password"}
+        await ac.post("/auth/token", data=data)
         yield ac

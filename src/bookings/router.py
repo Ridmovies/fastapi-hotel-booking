@@ -28,8 +28,7 @@ async def get_my_bookings(session: SessionDep, user: UserDep):
 
 @booking_router.post("", response_model=BookingSchema)
 async def create_booking(
-        session: SessionDep,
-        user: UserDep, room_id: int, date_from: date, date_to: date
+    session: SessionDep, user: UserDep, room_id: int, date_from: date, date_to: date
 ):
     """Create a new booking"""
     booking = await BookingService.add_booking(
@@ -37,7 +36,7 @@ async def create_booking(
         user_id=user.id,
         room_id=room_id,
         date_from=date_from,
-        date_to=date_to
+        date_to=date_to,
     )
     # Создаем адаптер для вашего типа данных
     adapter = TypeAdapter(BookingSchema)
@@ -45,7 +44,5 @@ async def create_booking(
     booking_dict = adapter.validate_python(booking).model_dump()
     # turn_on_email_notification
     if settings.turn_on_email_notification:
-        send_booking_confirmation_email.delay(
-            booking=booking_dict, email_to=user.email
-        )
+        send_booking_confirmation_email.delay(booking=booking_dict, email_to=user.email)
     return booking_dict

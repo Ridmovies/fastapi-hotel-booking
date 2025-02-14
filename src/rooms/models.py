@@ -6,7 +6,6 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from src.models import Base
 
 
-
 class Room(Base):
     name: Mapped[str] = mapped_column(String(length=150), nullable=False)
     description: Mapped[Optional[str]] = mapped_column(

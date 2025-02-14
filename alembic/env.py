@@ -10,10 +10,10 @@ from alembic import context
 from src.config import settings
 from src.models import Base
 
-from src.hotels.models import Hotel # noqa
-from src.users.models import User # noqa
-from src.rooms.models import Room # noqa
-from src.bookings.models import Booking # noqa
+from src.hotels.models import Hotel  # noqa
+from src.users.models import User  # noqa
+from src.rooms.models import Room  # noqa
+from src.bookings.models import Booking  # noqa
 
 
 # this is the Alembic Config object, which provides

@@ -9,5 +9,4 @@ class Base(DeclarativeBase):
         """create __tablename__ table name"""
         return f"{cls.__name__.lower()}"
 
-
     id: Mapped[int] = mapped_column(primary_key=True)

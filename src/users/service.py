@@ -19,4 +19,3 @@ class UserService(BaseService):
         session.add(user)
         await session.commit()
         return user
-

@@ -8,6 +8,7 @@ async def test_get_hotels(client: AsyncClient):
     assert response.status_code == 200
     assert len(response.json()) == 6
 
+
 @pytest.mark.asyncio
 async def test_get_hotel_by_location(client: AsyncClient):
     location = "Алтай"

@@ -18,6 +18,3 @@ async def get_hotels_page(
         name="hotels.html",
         context={"request": request, "hotels": hotels},
     )
-
-
-

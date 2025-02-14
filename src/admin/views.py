@@ -12,9 +12,9 @@ class UserAdmin(ModelView, model=User):
     column_list = [User.id, User.email]
     column_details_exclude_list = [User.hashed_password]
     can_delete = False
-    name = 'Пользователь'
-    name_plural = 'Пользователи'
-    icon = 'fa-solid fa-user'
+    name = "Пользователь"
+    name_plural = "Пользователи"
+    icon = "fa-solid fa-user"
 
 
 class BookingAdmin(ModelView, model=Booking):
@@ -22,9 +22,9 @@ class BookingAdmin(ModelView, model=Booking):
 
     column_labels = {"room.name": "room"}
     column_list = ["id", "user.email", "room.name"]
-    name = 'Бронирование'
-    name_plural = 'Бронирования'
-    icon = 'fa-solid fa-book'
+    name = "Бронирование"
+    name_plural = "Бронирования"
+    icon = "fa-solid fa-book"
     column_sortable_list = [
         "id",
         "user.email",
@@ -33,7 +33,8 @@ class BookingAdmin(ModelView, model=Booking):
 
 class HotelAdmin(ModelView, model=Hotel):
     """Класс для отображения отелей в админке."""
+
     column_list = "__all__"
-    name = 'Отель'
-    name_plural = 'Отели'
-    icon = 'fa-solid fa-hotel'
+    name = "Отель"
+    name_plural = "Отели"
+    icon = "fa-solid fa-hotel"

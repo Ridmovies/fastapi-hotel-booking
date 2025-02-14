@@ -15,9 +15,7 @@ else:
     DATABASE_URL = settings.DATABASE_URL
     DATABASE_PARAMS = {}
 
-async_engine = create_async_engine(
-    DATABASE_URL, echo=False, **DATABASE_PARAMS
-)
+async_engine = create_async_engine(DATABASE_URL, echo=False, **DATABASE_PARAMS)
 
 async_session_factory = async_sessionmaker(
     async_engine,
