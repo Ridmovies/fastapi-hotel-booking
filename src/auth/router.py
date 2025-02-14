@@ -35,19 +35,16 @@ async def login_for_access_token(
             key="access_token",
             value=access_token,
             httponly=True,
-            path="/",
-            secure=False,
         )
         return TokenSchema(access_token=access_token, token_type="cookie")
     return TokenSchema(access_token=access_token, token_type="bearer")
 
 @auth_router.post("/logout")
-async def logout(request: Request, response: Response):
+async def logout(response: Response, request: Request):
     if settings.JWT_TRANSPORT == "COOKIE":
-        print(response.headers)
-        response.delete_cookie("access_token", path="/")
-        print(response.headers)
-        return Response(status_code=204)
+        if request.cookies.get("access_token"):
+            response.delete_cookie(key="access_token", httponly=True)
+        return {"message": "Cookie deleted"}
 
 
 @auth_router.get("/me", response_model=UserSchema)

@@ -53,7 +53,6 @@ async def get_user_by_email(email: str) -> User:
 def get_access_token(request: Request):
     """This function is used to get the access token for cookie transport"""
     access_token = request.cookies.get("access_token")
-    print(f"{access_token=}")
     if not access_token:
         raise credentials_exception
     return access_token
