@@ -14,10 +14,11 @@ celery.conf.broker_connection_retry_on_startup = True
 
 @celery.task
 def process_image(path: str):
-    path = Path(path)
-    image = Image.open(path)
+    path_obj = Path(path)
+    image = Image.open(path_obj)
     image_resize = image.resize((200, 200))
-    image_resize.save(f"{settings.IMAGE_RESIZED_PATH}/small_{path.name}")
+    new_path = f"{settings.IMAGE_RESIZED_PATH}/small_{path_obj.name}"
+    image_resize.save(new_path)
 
 
 @celery.task

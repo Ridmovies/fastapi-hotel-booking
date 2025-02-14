@@ -63,3 +63,10 @@ line_length = 88
 [tool.autoflake]
 check_diff = true
 imports = ["sqlalchemy", "src"]
+
+[tool.pyright]
+include = ["src"]
+ignore = ["/alembic", "/src/services.py"]
+exclude = [
+]
+venv = ".venv"

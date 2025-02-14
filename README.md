@@ -198,7 +198,7 @@ autoflake ./src/main.py
 ```
 
 ```bash
-pyright .
+pyright ./src/main.py
 ```
 
 

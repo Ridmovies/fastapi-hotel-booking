@@ -10,12 +10,16 @@ class UserService(BaseService):
     model = User
 
     @classmethod
-    async def create_user(cls, session: AsyncSession, user_data: UserSchemaCreate):
+    async def create_user(
+            cls, session: AsyncSession, user_data: UserSchemaCreate
+    ) -> User | None:
         user_data_dict: dict = user_data.model_dump()
-        email: str = user_data_dict.get("email")
-        password: str = user_data_dict.get("password")
+        email: str | None = user_data_dict.get("email")
+        password: str | None = user_data_dict.get("password")
+        if not isinstance(password, str):
+            raise ValueError("Password must be a string.")
         hashed_password: bytes = get_password_hash(password)
-        user = User(email=email, hashed_password=hashed_password)
+        user: User = User(email=email, hashed_password=hashed_password)
         session.add(user)
         await session.commit()
         return user

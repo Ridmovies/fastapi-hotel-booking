@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 
 from sqlalchemy import JSON, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -21,3 +21,8 @@ class Room(Base):
 
     def __str__(self):
         return f"room: id - {self.id}, name - {self.name}"
+
+
+if TYPE_CHECKING:
+    from src.bookings.models import Booking
+    from src.hotels.models import Hotel

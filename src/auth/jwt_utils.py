@@ -22,8 +22,8 @@ ACCESS_TOKEN_EXPIRE_MINUTES = settings.ACCESS_TOKEN_EXPIRE_MINUTES
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/token")
 
 
-async def authenticate_user(session: AsyncSession, email: str, password: str):
-    user: User = await UserService.get_one_or_none(session=session, email=email)
+async def authenticate_user(session: AsyncSession, email: str, password: str) -> User | None:
+    user: User | None = await UserService.get_one_or_none(session=session, email=email)
     if not user:
         raise credentials_exception
     if not verify_password(password, user.hashed_password):
@@ -42,9 +42,9 @@ async def create_access_token(data: dict, expires_delta: timedelta | None = None
     return encoded_jwt
 
 
-async def get_user_by_email(email: str) -> User:
+async def get_user_by_email(email: str) -> User | None:
     async with async_session_factory() as session:
-        user: User = await UserService.get_one_or_none(session=session, email=email)
+        user: User | None = await UserService.get_one_or_none(session=session, email=email)
         if not user:
             raise credentials_exception
         return user
@@ -64,16 +64,16 @@ async def get_current_user(
         if settings.JWT_TRANSPORT == "BEARER"
         else Annotated[str, Depends(get_access_token)]
     ),
-):
+) -> User | None:
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        email: str = payload.get("sub")
+        email: str | None = payload.get("sub")
         if email is None:
             raise credentials_exception
         token_data = TokenData(email=email)
     except InvalidTokenError:
         raise credentials_exception
-    user: User = await get_user_by_email(email=token_data.email)
+    user: User | None = await get_user_by_email(email=token_data.email)
     if user is None:
         raise credentials_exception
     return user
