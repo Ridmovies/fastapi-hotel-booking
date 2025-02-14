@@ -5,22 +5,21 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
+from redis import asyncio as aioredis
 from sqladmin import Admin
 from starlette.middleware.cors import CORSMiddleware
 
 from src.admin.auth import authentication_backend
-from src.admin.views import UserAdmin, BookingAdmin, HotelAdmin
+from src.admin.views import BookingAdmin, HotelAdmin, UserAdmin
+from src.auth.router import auth_router
+from src.bookings.router import booking_router
 from src.database import async_engine
 from src.dev.router import dev_router
-from src.users.router import user_router
 from src.hotels.router import hotel_router
-from src.bookings.router import booking_router
-from src.rooms.router import room_router
-from src.auth.router import auth_router
-from src.pages.router import page_router
 from src.images.router import image_router
-
-from redis import asyncio as aioredis
+from src.pages.router import page_router
+from src.rooms.router import room_router
+from src.users.router import user_router
 
 
 @asynccontextmanager

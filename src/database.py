@@ -2,10 +2,9 @@ from typing import Annotated, AsyncGenerator
 
 from fastapi import Depends
 from sqlalchemy import NullPool
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from src.config import settings
-
 
 if settings.MODE == "TEST":
     DATABASE_URL = settings.TEST_DATABASE_URL

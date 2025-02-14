@@ -1,7 +1,7 @@
 from datetime import date
 from operator import or_
 
-from sqlalchemy import select, and_, func, insert
+from sqlalchemy import and_, func, insert, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.bookings.models import Booking

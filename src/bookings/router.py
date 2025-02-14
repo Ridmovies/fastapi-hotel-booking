@@ -8,7 +8,6 @@ from src.bookings.schemas import BookingSchema
 from src.bookings.service import BookingService
 from src.config import settings
 from src.database import SessionDep
-
 from src.tasks.tasks import send_booking_confirmation_email
 
 booking_router = APIRouter()

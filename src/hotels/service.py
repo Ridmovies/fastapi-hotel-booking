@@ -1,6 +1,6 @@
 from datetime import date
 
-from sqlalchemy import select, func, or_, and_
+from sqlalchemy import and_, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.bookings.models import Booking

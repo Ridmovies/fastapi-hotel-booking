@@ -1,4 +1,4 @@
-from datetime import timedelta, datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Annotated
 
 import jwt
@@ -14,7 +14,6 @@ from src.config import settings
 from src.database import async_session_factory
 from src.users.models import User
 from src.users.service import UserService
-
 
 SECRET_KEY = settings.SECRET_KEY
 ALGORITHM = settings.ALGORITHM

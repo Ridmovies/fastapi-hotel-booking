@@ -10,10 +10,10 @@ from src.bookings.models import Booking
 from src.config import settings
 from src.database import async_engine, async_session_factory
 from src.hotels.models import Hotel
+from src.main import app as test_app
 from src.models import Base
 from src.rooms.models import Room
 from src.users.models import User
-from src.main import app as test_app
 
 
 @pytest_asyncio.fixture(scope="session", autouse=True)

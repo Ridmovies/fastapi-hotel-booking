@@ -179,23 +179,22 @@ ___
 
 ## Linters and formats:
 ```bash
-black --check --diff --color ./src/bookings/services.py
+black --check --diff --color ./src/main.py
 ```
 
 ```bash
-flake8  ./src/bookings/router.py
+flake8  ./src/main.py
 ```
 
 ```bash
-isort --check-only --diff --color --profile black ./src/bookings/services.py
+isort --check-only --diff --color --profile black ./src/main.py
+
+```bash
+mypy --incremental ./src/main.py
 ```
 
 ```bash
-mypy --incremental ./product_app/views.py 
-```
-
-```bash
-autoflake ./app/booking/router.py
+autoflake ./src/main.py
 ```
 
 ```bash

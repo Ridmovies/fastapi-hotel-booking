@@ -2,7 +2,7 @@ from fastapi import APIRouter
 
 from src.database import SessionDep
 from src.exceptions import UserAlreadyExistsException
-from src.users.schemas import UserSchemaCreate, UserSchema
+from src.users.schemas import UserSchema, UserSchemaCreate
 from src.users.service import UserService
 
 user_router = APIRouter()
