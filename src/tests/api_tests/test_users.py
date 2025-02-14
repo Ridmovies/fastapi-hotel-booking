@@ -14,6 +14,17 @@ async def test_all_users(client: AsyncClient):
 
 
 @pytest.mark.asyncio
+async def test_user_login(client: AsyncClient):
+    data = {
+        "username": "test@test.com",
+        "password": "password"
+    }
+    response = await client.post("/auth/token", data=data)
+    assert response.status_code == 200
+
+
+
+@pytest.mark.asyncio
 @pytest.mark.parametrize(
     "email,password,status_code",
     [
@@ -39,7 +50,7 @@ async def test_register_user(
     [
         ("test@test.com", "password", 200),
         ("artem@example.com", "password", 200),
-        ("example", "example", 422),
+        ("example", "example", 401),
         ("wrong@example.com", "1234455", 401),
     ],
 )
@@ -47,7 +58,7 @@ async def test_login_user(
     email: str, password: str, status_code: int, client: AsyncClient
 ) -> None:
     response = await client.post(
-        "/auth/token", json={"email": email, "password": password}
+        "/auth/token", data={"username": email, "password": password}
     )
     assert response.status_code == status_code
 
@@ -78,9 +89,11 @@ async def test_get_me(client: AsyncClient):
     response = await client.get("/auth/me")
     assert response.status_code == 401
 
-    response = await client.post(
-        "/auth/token", json={"email": "test@test.com", "password": "password"}
-    )
+    data = {
+        "username": "test@test.com",
+        "password": "password"
+    }
+    response = await client.post("/auth/token", data=data)
     assert response.status_code == 200
 
     response = await client.get("/auth/me")

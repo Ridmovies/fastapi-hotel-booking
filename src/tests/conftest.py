@@ -68,12 +68,16 @@ async def client() -> AsyncGenerator[AsyncClient, None]:
 
 @pytest_asyncio.fixture(scope="session")
 async def authenticated_client() -> AsyncGenerator[AsyncClient, None]:
-    """Create a http client."""
+    """Create an authenticated http client."""
     async with AsyncClient(
         transport=ASGITransport(app=test_app),
         base_url="http://test",
     ) as ac:
+        data = {
+            "username": "test@test.com",
+            "password": "password"
+        }
         await ac.post(
-            "/auth/token", json={"email": "test@test.com", "password": "password"}
+            "/auth/token", data=data
         )
         yield ac
