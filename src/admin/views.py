@@ -2,7 +2,6 @@ from sqladmin import ModelView
 
 from src.bookings.models import Booking
 from src.hotels.models import Hotel
-from src.rooms.models import Room
 from src.users.models import User
 
 

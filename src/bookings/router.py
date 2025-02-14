@@ -1,10 +1,10 @@
 from datetime import date
 
 from fastapi import APIRouter
-from pydantic import parse_obj_as, TypeAdapter
+from pydantic import TypeAdapter
 
 from src.auth.jwt_utils import UserDep
-from src.bookings.schemas import BookingCreate, BookingSchema
+from src.bookings.schemas import BookingSchema
 from src.bookings.service import BookingService
 from src.config import settings
 from src.database import SessionDep

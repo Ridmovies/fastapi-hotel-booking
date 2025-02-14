@@ -681,6 +681,9 @@ files = [
     {file = "isort-6.0.0.tar.gz", hash = "sha256:75d9d8a1438a9432a7d7b54f2d3b45cad9a4a0fdba43617d9873379704a8bdf1"},
 ]
 
+[package.dependencies]
+colorama = {version = "*", optional = true, markers = "extra == \"colors\""}
+
 [package.extras]
 colors = ["colorama"]
 plugins = ["setuptools"]
@@ -1708,4 +1711,4 @@ email = ["email-validator"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "81da1f6649ea1bc28481b6e3b3c94fe85a79d9b4be1e2b28aec896a5b2ec3354"
+content-hash = "56f2a7386d620eb4ecbde233d70f7b4864cb338e35bf5301076ccdff6ce905d9"

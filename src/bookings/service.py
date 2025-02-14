@@ -5,7 +5,6 @@ from sqlalchemy import select, and_, func, insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.bookings.models import Booking
-from src.database import async_engine
 from src.exceptions import RoomCantBookedException
 from src.rooms.models import Room
 from src.services import BaseService
@@ -54,7 +53,9 @@ class BookingService(BaseService):
         )
 
         # print sql query to check if there are available rooms
-        # print(get_available_rooms.compile(bind=async_engine, compile_kwargs={"literal_binds": True}))
+        # print(get_available_rooms.compile(
+        # bind=async_engine, compile_kwargs={"literal_binds": True})
+        # )
         rooms_available = await session.execute(get_available_rooms)
         rooms_available = rooms_available.scalar()
 

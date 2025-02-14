@@ -177,6 +177,32 @@ ___
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
+## Linters and formats:
+```bash
+black --check --diff --color ./src/bookings/services.py
+```
+
+```bash
+flake8  ./src/bookings/router.py
+```
+
+```bash
+isort --check-only --diff --color --profile black ./src/bookings/services.py
+```
+
+```bash
+mypy --incremental ./product_app/views.py 
+```
+
+```bash
+autoflake ./app/booking/router.py
+```
+
+```bash
+pyright .
+```
+
+
 ## Useful links:
 SQLAlchemy 2.0 Documentation:
 https://docs.sqlalchemy.org/en/20/dialects/postgresql.html#module-sqlalchemy.dialects.postgresql.asyncpg
