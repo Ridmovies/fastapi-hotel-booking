@@ -1,7 +1,9 @@
 from contextlib import asynccontextmanager
+import time
+import sentry_sdk
 from typing import AsyncIterator
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
@@ -17,6 +19,7 @@ from src.database import async_engine
 from src.dev.router import dev_router
 from src.hotels.router import hotel_router
 from src.images.router import image_router
+from src.logger import logger
 from src.pages.router import page_router
 from src.rooms.router import room_router
 from src.users.router import user_router
@@ -31,7 +34,25 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
 
 app = FastAPI(lifespan=lifespan)
 
-# admin = Admin(app, async_engine)
+
+
+sentry_sdk.init(
+    dsn="https://a89d03b408ba6a73d6094b8b22f4e395@o4506981955272704.ingest.us.sentry.io/4508822225289216",
+    # Add data like request headers and IP for users,
+    # see https://docs.sentry.io/platforms/python/data-management/data-collected/ for more info
+    send_default_pii=True,
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for tracing.
+    traces_sample_rate=1.0,
+    _experiments={
+        # Set continuous_profiling_auto_start to True
+        # to automatically start the profiler on when
+        # possible.
+        "continuous_profiling_auto_start": True,
+    },
+)
+
+
 admin = Admin(app, async_engine, authentication_backend=authentication_backend)
 admin.add_view(UserAdmin)
 admin.add_view(BookingAdmin)
@@ -72,3 +93,19 @@ app.add_middleware(
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
+
+
+
+@app.middleware("http")
+async def add_process_time_header(request: Request, call_next):
+    """Добавляет заголовок со временем выполнения запроса."""
+    start_time = time.time()
+    response = await call_next(request)
+    process_time = time.time() - start_time
+    logger.info("Request handling time",
+                extra={
+                    "request_to": request.url,
+                    "method": request.method,
+                    "process_time": round(process_time, 4)
+                })
+    return response

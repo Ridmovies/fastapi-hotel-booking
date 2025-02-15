@@ -7,6 +7,7 @@ class Config(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env")
 
     MODE: Literal["DEV", "TEST", "PROD"]
+    LOG_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
 
     # postgresql
     DATABASE_URL: str

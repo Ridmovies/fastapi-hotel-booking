@@ -32,3 +32,9 @@ async def get_cookie(request: Request):
     """Get a cookie"""
     cookie = request.cookies.get("123")
     return {"cookie": cookie}
+
+
+@dev_router.get("/sentry-debug")
+async def trigger_error():
+    """Trigger an error"""
+    division_by_zero = 1 / 0
