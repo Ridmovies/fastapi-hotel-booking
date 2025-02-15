@@ -7,6 +7,7 @@ from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
+from fastapi_versioning import VersionedFastAPI
 from redis import asyncio as aioredis
 from sqladmin import Admin
 from starlette.middleware.cors import CORSMiddleware
@@ -32,8 +33,14 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
     yield
 
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(
+    title='Booking API',
+    lifespan=lifespan,
+)
 
+origins = [
+    "http://localhost:3000",
+]
 
 
 sentry_sdk.init(
@@ -52,15 +59,6 @@ sentry_sdk.init(
     },
 )
 
-
-admin = Admin(app, async_engine, authentication_backend=authentication_backend)
-admin.add_view(UserAdmin)
-admin.add_view(BookingAdmin)
-admin.add_view(HotelAdmin)
-
-
-app.mount("/static", StaticFiles(directory="src/static"), name="static")
-
 app.include_router(user_router, prefix="/users", tags=["users"])
 app.include_router(hotel_router, prefix="/hotel", tags=["hotel"])
 app.include_router(booking_router, prefix="/booking", tags=["booking"])
@@ -71,9 +69,14 @@ app.include_router(image_router, prefix="/image", tags=["image"])
 
 app.include_router(dev_router, prefix="/dev", tags=["dev"])
 
-origins = [
-    "http://localhost:3000",
-]
+# Place above all mounts, but after all routers. Location is important.
+app = VersionedFastAPI(
+    app,
+    version_format="{major}",
+    prefix_format="/v{major}",
+    description="Booking API Description",
+)
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -89,11 +92,9 @@ app.add_middleware(
     ],
 )
 
-
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
-
 
 
 @app.middleware("http")
@@ -109,3 +110,10 @@ async def add_process_time_header(request: Request, call_next):
                     "process_time": round(process_time, 4)
                 })
     return response
+
+
+app.mount("/static", StaticFiles(directory="src/static"), name="static")
+admin = Admin(app, async_engine, authentication_backend=authentication_backend)
+admin.add_view(UserAdmin)
+admin.add_view(BookingAdmin)
+admin.add_view(HotelAdmin)
