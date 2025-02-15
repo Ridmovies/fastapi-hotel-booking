@@ -2,7 +2,8 @@ from fastapi import APIRouter, Request, Response
 from fastapi_versioning import version
 from sqlalchemy import text
 
-from src.database import SessionDep
+from src.database import SessionDep, async_engine
+from src.models import Base
 
 dev_router = APIRouter()
 
@@ -13,6 +14,13 @@ async def check_db_connection(session: SessionDep):
     """Check if the database connection is successful"""
     await session.execute(text("SELECT 1"))
     return {"message": "Connection to the database successful"}
+
+
+@dev_router.post("/create_db_tables")
+async def create_db_tables():
+    async with async_engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    return {"message": "Database tables created"}
 
 
 @dev_router.post("/set_cookie")
