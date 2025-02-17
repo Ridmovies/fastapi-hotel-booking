@@ -12,7 +12,7 @@ dev_router = APIRouter()
 
 
 @dev_router.get("/check-db-connection")
-@version(2)
+@version(1)
 async def check_db_connection(session: SessionDep):
     """Check if the database connection is successful"""
     await session.execute(text("SELECT 1"))
@@ -27,7 +27,7 @@ async def create_db_tables():
 
 
 @dev_router.post("/set_cookie")
-@version(2)
+@version(1)
 async def set_cookie(response: Response):
     """Set a cookie"""
     response.set_cookie(key="123", value="value", httponly=True)
@@ -35,7 +35,7 @@ async def set_cookie(response: Response):
 
 
 @dev_router.post("/delete_cookie")
-@version(2)
+@version(1)
 async def delete_cookie(response: Response):
     """Delete a cookie"""
     response.delete_cookie(key="123", httponly=True)
@@ -43,7 +43,7 @@ async def delete_cookie(response: Response):
 
 
 @dev_router.get("/get_cookie")
-@version(2)
+@version(1)
 async def get_cookie(request: Request):
     """Get a cookie"""
     cookie = request.cookies.get("123")
@@ -51,7 +51,7 @@ async def get_cookie(request: Request):
 
 
 @dev_router.get("/sentry-debug")
-@version(2)
+@version(1)
 async def trigger_error():
     """Trigger an error"""
     division_by_zero = 1 / 0

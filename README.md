@@ -48,7 +48,138 @@ Hotel booking service. Users can book the desired type of hotel room for a speci
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+---
+
+
+## Built With
+
+1. FastAPI – A modern, fast, and lightweight web framework for building APIs with Python.
+2. SQLAdmin – An automatic admin interface generator for FastAPI applications.
+3. PostgreSQL – A powerful, open-source object-relational database system.
+4. AsyncPG – A PostgreSQL client library built on top of asyncio for asynchronous operations in Python.
+5. SQLAlchemy – The Python SQL toolkit and Object Relational Mapper that provides full support for SQL Alchemy Core and ORM.
+6. Celery – A distributed task queue that can be used to execute tasks asynchronously or periodically.
+7. Redis – An in-memory data structure store, used as a database, cache, and message broker.
+8. Alembic – A lightweight migration tool for relational databases that supports versioning and schema changes.
+9. FastAPI Versioning – A package that adds URL versioning capabilities to FastAPI applications.
+10. FastAPI Cache2 – A caching solution for FastAPI applications using Redis or other backends.
+11. Prometheus FastAPI Instrumentator – A Prometheus metrics exporter for FastAPI applications.
+12. Sentry SDK – A real-time error tracking and monitoring tool for Python applications.
+13. Pydantic Settings – A settings management library based on Pydantic models.
+14. Python JSON Logger – A structured logging library for Python that outputs logs in JSON format.
+15. Jinja2 – A popular templating engine for Python, often used in web development.
+16. Flower – A web-based tool for monitoring and administrating Celery clusters and tasks.
+17. Bcrypt – A password hashing function designed to be slow and resistant to brute-force attacks.
+18. PyJWT – A Python implementation of the JSON Web Token (JWT) standard.
+19. Pytest – A testing framework for writing small and scalable tests in Python.
+20. Pytest Asyncio – A plugin for Pytest that allows testing async code written with the asyncio module.
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- Python 3.9 or higher
+- pip (Python package installer)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ___
+
+
+## Installation
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/yourusername/your-repo-name.git
+   cd your-repo-name
+   ```
+
+2. Create a virtual environment (optional but recommended):
+
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    ```
+   
+3. Install the dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+   
+4. Create .env file:
+* Rename '.env.template' to '.env'
+* Create local postgres database
+* Replace the settings with your own
+
+5. Update the database to the latest migration version:
+    ```bash
+    alembic upgrade head
+    ```
+
+
+6. Running the Application:
+    ```bash
+    uvicorn main:app --reload
+    ```
+
+The application will be available at http://127.0.0.1:8000/v1/docs
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+___
+
+
+### Installation for Linux with docker-compose (postgres database version)
+
+*  #### Clone the repo
+   ```bash
+   git clone https://github.com/yourusername/your-repo-name.git
+   ```
+  
+* ### Install Docker Engine
+- https://docs.docker.com/engine/install/
+- https://docs.docker.com/engine/install/ubuntu/
+
+* #### Enter the application root folder: 
+    ```bash
+   cd your-repo-name
+    ```
+
+### Build a new image and run containers
+```bash
+docker-compose up --build
+```
+
+The application will be available at http://127.0.0.1:5000/v1/docs
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+___
+
+
+### API Documentation
+
+FastAPI automatically generates interactive API documentation (5000 port if run in docker compose):
+
+    Swagger UI: http://127.0.0.1:8000/docs
+
+    or Swagger UI v1: http://127.0.0.1:8000/v1/docs
+
+    ReDoc: http://127.0.0.1:8000/redoc
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+___
+
+
+
 ## Develop 
 
 ### Start your application using Uvicorn in root folder :
@@ -281,4 +412,8 @@ https://fastapi.tiangolo.com/tutorial/background-tasks/
 
 SQLAlchemy Admin for Starlette/FastAPI:
 https://aminalaee.dev/sqladmin/
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ___
