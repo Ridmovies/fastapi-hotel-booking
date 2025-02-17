@@ -125,7 +125,7 @@ ___
 
 6. Running the Application:
     ```bash
-    uvicorn main:app --reload
+    uvicorn src.main:app --reload
     ```
 
 The application will be available at http://127.0.0.1:8000/v1/docs
@@ -336,50 +336,45 @@ ___
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Команды для работы с Docker и Docker Compose
-Эти команды помогут управлять контейнерами и образами в вашем проекте, обеспечивая удобный процесс разработки и тестирования.
+## Commands for Working with Docker and Docker Compose
+These commands will help you manage containers and images in your project, 
+ensuring a smooth development and testing process.
 
-### Создание образа из Dockerfile
+### Building an Image from a Dockerfile
 ```bash
 docker build -t booking .
 ```
 
-### Запуск контейнера из образа
+### Running a Container from an Image
 ```bash
 docker run -p 9000:8000 booking
 ```
 
-### Удалить все контейнеры
+### Delete All Containers
 ```bash
 docker rm $(docker ps -aq)
 ```
 
-### Удалить все образы
+### Delete All Images
 ```bash
 docker rmi $(docker images -q)
 ```
 
-### Остановка и удаление всех сервисов и образов
-
+### Stopping and Removing All Services and Images
 ```bash
 docker-compose down --rmi all
 ```
 
-## Для запуска консоли внутри работающего Docker-контейнера используется команда docker exec
+### Accessing the Console Inside a Running Docker Container
 ```bash
-docker exec -it megano bash 
+docker exec -it container_name bash 
 ```
 
-
-
-Эта команда останавливает и удаляет все сервисы, созданные с помощью `docker-compose`, а также удаляет образы, использованные этими сервисами.
-
-### Сборка нового образа
-
+### Building a New Image
+This command builds a new image based on the instructions in docker-compose.yml.
 ```bash
 docker-compose build
 ```
-Эта команда собирает новый образ на основе инструкций в `docker-compose.yml`.
 
 ___
 
