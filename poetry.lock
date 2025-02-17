@@ -1162,6 +1162,21 @@ files = [
 twisted = ["twisted"]
 
 [[package]]
+name = "prometheus-fastapi-instrumentator"
+version = "7.0.2"
+description = "Instrument your FastAPI app with Prometheus metrics"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "prometheus_fastapi_instrumentator-7.0.2-py3-none-any.whl", hash = "sha256:975e39992acb7a112758ff13ba95317e6c54d1bbf605f9156f31ac9f2800c32d"},
+    {file = "prometheus_fastapi_instrumentator-7.0.2.tar.gz", hash = "sha256:8a4d8fb13dbe19d2882ac6af9ce236e4e1f98dc48e3fa44fe88d8e23ac3c953f"},
+]
+
+[package.dependencies]
+prometheus-client = ">=0.8.0,<1.0.0"
+starlette = ">=0.30.0,<1.0.0"
+
+[[package]]
 name = "prompt-toolkit"
 version = "3.0.50"
 description = "Library for building powerful interactive command lines in Python"
@@ -1834,4 +1849,4 @@ email = ["email-validator"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "657fb2330c0a1bfbd29206016a74474152889b56543ee58b6e02c3f8bf44adaa"
+content-hash = "4891e644fc41e11bf547490ca5a9f217e9d70a7930b8271b3315ad481ba7ef7d"

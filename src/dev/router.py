@@ -1,3 +1,6 @@
+import time
+from random import random
+
 from fastapi import APIRouter, Request, Response
 from fastapi_versioning import version
 from sqlalchemy import text
@@ -52,3 +55,29 @@ async def get_cookie(request: Request):
 async def trigger_error():
     """Trigger an error"""
     division_by_zero = 1 / 0
+
+
+@dev_router.get("/prometheus/get_error")
+@version(1)
+def get_error():
+    """Функция для теста Prometheus + Grafana."""
+    if random() > 0.5:
+        raise ZeroDivisionError
+    else:
+        raise KeyError
+
+
+@dev_router.get("/prometheus/time_consumer")
+@version(1)
+def time_consumer():
+    """Функция для теста Prometheus + Grafana."""
+    time.sleep(random() * 5)
+    return "Тест завершен."
+
+
+@dev_router.get("/prometheus/memory_consumer")
+@version(1)
+def memory_consumer():
+    """Функция для теста Prometheus + Grafana."""
+    _ = [i for i in range(30_000_000)]
+    return "Тест завершен."
